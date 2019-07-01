@@ -47,7 +47,7 @@ class App extends React.Component {
     <div className="App">
       <Header />
       <Search handleSearch={this.handleSearch}/>
-      <Results items={this.state.items} isLoading={this.state.isLoading}/>
+      <Results items={this.state.items} isLoading={this.state.isLoading} hasError={this.state.error}/>
     </div>
     );
   }

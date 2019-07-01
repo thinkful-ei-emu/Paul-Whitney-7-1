@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 
 function Results(props) {
-  const list=props.items.map((book,index)=>{
-    let price= (!book.saleInfo)? 'No sale info' : (book.saleInfo.saleability==='NOT_FOR_SALE')? 'Not for sale': (!book.saleInfo.listPrice)? 'Priceless': `$${book.saleInfo.listPrice.amount}`;
+  const list= (props.items) ? props.items.map((book,index)=>{
+    let price= (!book.saleInfo)? 'No sale info' : (book.saleInfo.saleability==='NOT_FOR_SALE')? 'Not for sale': (!book.saleInfo.listPrice)? 'Priceless': `$${book.saleInfo.listPrice.amount.toFixed(2)}`;
     let authors = !(book.volumeInfo.authors)? 'No authors found' : book.volumeInfo.authors.join(", ");
     return(
     <div className='book' key={index}>
@@ -23,10 +23,10 @@ function Results(props) {
 
     </div>
     );
-  })
+  }) : "Uh oh!  No Results found!"
   return (
     <div>
-      {props.isLoading? "Loading...": list}
+      {props.isLoading? "Loading...": (props.hasError)? `Oops! There was an error: ${props.hasError}` : list}
     </div>
   );
 
