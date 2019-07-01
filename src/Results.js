@@ -4,7 +4,7 @@ import './App.css';
 function Results(props) {
   const list= (props.items) ? props.items.map((book,index)=>{
     let price= (!book.saleInfo)? 'No sale info' : (book.saleInfo.saleability==='NOT_FOR_SALE')? 'Not for sale': (!book.saleInfo.listPrice)? 'Priceless': `$${book.saleInfo.listPrice.amount.toFixed(2)}`;
-    let authors = !(book.volumeInfo.authors)? 'No authors found' : book.volumeInfo.authors.join(", ");
+    let authors = !(book.volumeInfo.authors)? 'No authors found' : (book.volumeInfo.authors.length === 1)? `Author: ${book.volumeInfo.authors}`: `Authors: ${book.volumeInfo.authors.join(", ")}`;
     return(
     <div className='book' key={index}>
       
@@ -12,7 +12,7 @@ function Results(props) {
       <img src={book.volumeInfo.imageLinks.thumbnail} alt="book"/>
       <div className='book-info'>
         <p>
-          {`Author(s): ${authors}`}
+          {authors}
           <br/>
           {`Price: ${price}`}
         </p>
